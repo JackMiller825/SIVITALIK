@@ -1,7 +1,7 @@
 export const assets = {
   logo: { src: "/brand/logo.webp", width: 1024, height: 1024 },
   banner: { src: "/brand/banner.webp", width: 2000, height: 667 },
-  heroCharacter: { src: "/brand/hero-character.webp", width: 1200, height: 1200 },
+  heroCharacter: { src: "/brand/hero-character.webp", width: 1122, height: 1402 },
   heroBackground: { src: "/brand/hero-background.webp", width: 1672, height: 941 },
   socialPreview: { src: "/brand/social-preview.jpg", width: 1200, height: 630 },
   intelligence: { src: "/brand/scene-intelligence.webp", width: 1200, height: 900 },

@@ -98,7 +98,7 @@ export function Hero() {
           ) : null}
         </div>
 
-        <div className="relative mx-auto w-full max-w-[520px]">
+        <div className="relative mx-auto w-full max-w-[620px]">
           <div
             className="pointer-events-none absolute inset-[14%] rounded-full bg-[radial-gradient(circle,rgba(139,61,255,0.5),rgba(53,223,255,0.12)_45%,transparent_70%)] blur-2xl"
             aria-hidden="true"
@@ -109,12 +109,12 @@ export function Hero() {
           >
             <Image
               src={assets.heroCharacter.src}
-              alt="The Superintelligent Vitalik figure, wearing a crystal crown and crystalline armor, with an Ethereum diamond at the chest."
+              alt="The Superintelligent Vitalik figure in crystalline armor, holding a glowing Ethereum crystal, with a neural network of light behind him."
               width={assets.heroCharacter.width}
               height={assets.heroCharacter.height}
               priority
-              sizes="(max-width: 1024px) 88vw, 500px"
-              className="mx-auto h-auto max-h-[42vh] w-full object-contain object-bottom sm:max-h-[48vh] lg:max-h-[72vh]"
+              sizes="(max-width: 1024px) 92vw, 620px"
+              className="mx-auto h-auto w-full object-contain object-center max-h-[min(46vh,calc(100svh-14rem))] sm:max-h-[min(52vh,calc(100svh-13rem))] lg:max-h-[min(78vh,calc(100svh-12rem))]"
             />
           </div>
         </div>
