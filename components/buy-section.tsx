@@ -1,31 +1,23 @@
 import { CopyAddress } from "@/components/copy-address";
 import { PrimaryLink } from "@/components/primary-link";
 import { project } from "@/config/project";
-import { buyHref, channels, chartHref } from "@/lib/project";
+import { buyHref, chartHref, socialLinks } from "@/lib/project";
 
 const STEPS = [
   {
-    title: "Set Up Your Wallet",
-    body: "Choose an Ethereum-compatible wallet. Install it from its official source and complete the setup.",
-    note: "Keep your recovery phrase private. This website never needs it.",
+    title: "Create a Wallet",
     icon: WalletIcon,
   },
   {
-    title: "Add ETH on Ethereum",
-    body: "Add ETH to your wallet on Ethereum Mainnet. Keep enough available for the purchase and network fees.",
-    note: "Check the withdrawal network before transferring from an exchange.",
+    title: "Get Some ETH",
     icon: EthIcon,
   },
   {
-    title: "Open the Trading Page",
-    body: "",
-    note: "",
+    title: "Go to Uniswap",
     icon: LinkIcon,
   },
   {
-    title: "Review and Confirm",
-    body: "Enter the amount of ETH, then review the expected tokens, price impact, slippage tolerance, and fees. Confirm only if the details match your intention.",
-    note: "After confirmation, you can inspect the transaction in your wallet or on the block explorer.",
+    title: `Switch ETH for ${project.DISPLAY_TICKER}`,
     icon: CheckIcon,
   },
 ];
@@ -61,7 +53,7 @@ export function BuySection() {
   const buy = buyHref();
   const chart = chartHref();
   const address = project.CONTRACT_ADDRESS?.trim() || null;
-  const socials = channels();
+  const socials = socialLinks();
   const live = Boolean(buy);
 
   return (
@@ -87,67 +79,37 @@ export function BuySection() {
                   <p className="font-mono text-xs tracking-[0.16em] text-cyan uppercase">Step 0{index + 1}</p>
                 </div>
                 <h3 className="mt-4 text-xl font-semibold text-silver">{step.title}</h3>
-                {index === 2 ? (
-                  live ? (
-                    <div className="mt-3 space-y-3">
-                      <p className="text-base leading-relaxed text-mist">
-                        Open the project’s published trading link, connect your wallet on the exchange, and confirm that the selected token matches the contract address shown here.
-                      </p>
-                      <p className="text-sm text-silver">Network: {project.NETWORK}</p>
-                      {buy ? (
-                        <PrimaryLink href={buy} external>
-                          Open the trading page
-                        </PrimaryLink>
-                      ) : null}
-                      {address ? <CopyAddress address={address} /> : null}
-                    </div>
-                  ) : (
-                    <p className="mt-3 text-base leading-relaxed text-mist">
-                      Trading is not live yet. The trading link and contract details will appear here when announced.
-                    </p>
-                  )
-                ) : (
-                  <>
-                    <p className="mt-3 text-base leading-relaxed text-mist">{step.body}</p>
-                    <p className="mt-3 text-sm leading-relaxed text-mist">{step.note}</p>
-                  </>
-                )}
+                <StepBody index={index} address={address} />
               </li>
             );
           })}
         </ol>
 
         <aside className="mt-6 rounded-[28px] border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-          {live && buy ? (
-            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+            {live && buy ? (
               <PrimaryLink href={buy} external>
                 Buy {project.DISPLAY_TICKER}
               </PrimaryLink>
-              {address ? <CopyAddress address={address} /> : null}
-              {chart ? (
-                <a href={chart} target="_blank" rel="noopener noreferrer" className="focus-ring text-sm text-cyan underline-offset-4 hover:underline">
-                  View Chart
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              ) : null}
-            </div>
-          ) : (
-            <div className="space-y-3">
-              <p className="text-lg text-silver">Trading details coming soon.</p>
-              {socials.length > 0 ? (
-                <ul className="flex flex-wrap gap-4">
-                  {socials.map((link) => (
-                    <li key={link.href}>
-                      <a href={link.href} target="_blank" rel="noopener noreferrer" className="focus-ring text-sm text-cyan underline-offset-4 hover:underline">
-                        {link.label}
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          )}
+            ) : (
+              <PrimaryLink href="https://app.uniswap.org/" external>
+                Open Uniswap
+              </PrimaryLink>
+            )}
+            {address ? <CopyAddress address={address} /> : null}
+            {chart ? (
+              <a href={chart} target="_blank" rel="noopener noreferrer" className="focus-ring text-sm text-cyan underline-offset-4 hover:underline">
+                View Chart
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ) : null}
+            {socials.map((link) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="focus-ring text-sm text-cyan underline-offset-4 hover:underline">
+                {link.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ))}
+          </div>
           <p className="mt-4 text-sm leading-relaxed text-mist">
             This site does not connect a wallet or submit a swap. The exchange page is where a purchase happens.
           </p>
@@ -170,6 +132,50 @@ export function BuySection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function StepBody({ index, address }: { index: number; address: string | null }) {
+  if (index === 0) {
+    return (
+      <p className="mt-3 text-base leading-relaxed text-mist">
+        Download MetaMask or your wallet of choice from the App Store or Google Play Store for free. Desktop users, download the Google Chrome extension by going to{" "}
+        <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer" className="focus-ring text-cyan underline-offset-4 hover:underline">
+          metamask.io
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+        .
+      </p>
+    );
+  }
+  if (index === 1) {
+    return (
+      <p className="mt-3 text-base leading-relaxed text-mist">
+        Have ETH in your wallet to switch to {project.DISPLAY_TICKER}. If you don’t have any ETH, you can buy directly on MetaMask, transfer from another wallet, or buy on another exchange and send it to your wallet.
+      </p>
+    );
+  }
+  if (index === 2) {
+    return (
+      <div className="mt-3 space-y-3">
+        <p className="text-base leading-relaxed text-mist">
+          Connect to Uniswap. Go to{" "}
+          <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer" className="focus-ring text-cyan underline-offset-4 hover:underline">
+            app.uniswap.org
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>{" "}
+          in Google Chrome or on the browser inside your MetaMask app. Connect your wallet. Paste the {project.DISPLAY_TICKER} token address into Uniswap, select {project.DISPLAY_TICKER}, and confirm. When MetaMask prompts you for a wallet signature, check that it matches this swap, then sign.
+        </p>
+        {address ? <CopyAddress address={address} /> : (
+          <p className="text-sm leading-relaxed text-mist">The token address will appear here when it is published.</p>
+        )}
+      </div>
+    );
+  }
+  return (
+    <p className="mt-3 text-base leading-relaxed text-mist">
+      Switch ETH for {project.DISPLAY_TICKER}. We have zero taxes, so you don’t need to worry about buying with a specific slippage, although you may need to use slippage during times of market volatility.
+    </p>
   );
 }
 

@@ -63,9 +63,9 @@ These stay `null` on purpose:
 - Block explorer URL
 - Trading URL
 - Chart URL
-- Telegram, X, and any other official channel
-- Total supply and decimals
-- Buy tax and sell tax
+- The real X profile URL (`X_URL` currently opens https://x.com/)
+- The real Telegram URL (`TELEGRAM_URL` currently opens https://t.me/)
+- Total supply and decimals, if you want them recorded in config
 - Allocation basis and category list
 - Liquidity evidence
 - Administrative controls

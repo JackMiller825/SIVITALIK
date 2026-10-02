@@ -52,14 +52,31 @@ export function telegramHref(): string | null {
   return httpUrl(project.TELEGRAM_URL);
 }
 
+export function xHref(): string | null {
+  return httpUrl(project.X_URL);
+}
+
+function hasProfilePath(value: string | null): boolean {
+  if (!value) return false;
+  try {
+    const path = new URL(value).pathname.replace(/\/+$/, "");
+    return path.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 export type PublicChannel = { label: string; href: string };
 
+export function socialLinks(): PublicChannel[] {
+  return [
+    { label: "X", href: xHref() ?? "https://x.com/" },
+    { label: "Telegram", href: telegramHref() ?? "https://t.me/" },
+  ];
+}
+
 export function channels(): PublicChannel[] {
-  const items: PublicChannel[] = [];
-  const telegram = telegramHref();
-  const x = httpUrl(project.X_URL);
-  if (telegram) items.push({ label: "Telegram", href: telegram });
-  if (x) items.push({ label: "X", href: x });
+  const items: PublicChannel[] = [...socialLinks()];
   for (const channel of project.OTHER_CHANNELS as OfficialChannel[]) {
     const href = httpUrl(channel.url);
     const label = channel.label.trim();
@@ -78,7 +95,9 @@ export function launchAction(): { href: string; label: string; external: boolean
 
 export function secondaryAction(): { href: string; label: string; external: boolean } {
   const telegram = telegramHref();
-  if (telegram) return { href: telegram, label: "Join Telegram", external: true };
+  if (telegram && hasProfilePath(telegram)) {
+    return { href: telegram, label: "Join Telegram", external: true };
+  }
   return { href: "#experience", label: "Explore the Experience", external: false };
 }
 

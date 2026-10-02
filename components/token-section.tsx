@@ -18,7 +18,6 @@ function Fact({ label, value, note }: { label: string; value: string; note?: str
 }
 
 export function TokenSection() {
-  const supply = project.TOTAL_SUPPLY;
   const allocation = allocationSummary();
   const address = project.CONTRACT_ADDRESS?.trim() || null;
   const explorer = explorerHref();
@@ -45,10 +44,10 @@ export function TokenSection() {
           Tokenomics
         </h2>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-mist">
-          The supply, distribution, and contract details behind {project.DISPLAY_TICKER}.
+          The contract details behind {project.DISPLAY_TICKER}.
         </p>
 
-        <div className="mt-10 grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div className="mt-10 grid items-stretch gap-4 lg:grid-cols-2">
           <article className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#070b1c] p-6 sm:p-8">
             <div className="pointer-events-none absolute right-4 bottom-4 w-28 opacity-70 sm:w-36" aria-hidden="true">
               <div className="relative aspect-[4/3]">
@@ -62,26 +61,12 @@ export function TokenSection() {
                 />
               </div>
             </div>
-            <p className="font-mono text-[0.72rem] tracking-[0.16em] text-cyan uppercase">Total supply</p>
-            {supply ? (
-              <p className="mt-3 max-w-full font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-none font-bold break-words text-silver">
-                {groupInteger(supply)}
-                {!live ? <span className="mt-3 block font-sans text-base font-medium tracking-normal text-mist normal-case">Announced supply. Trading status is separate.</span> : null}
-              </p>
-            ) : (
-              <p className="mt-3 max-w-sm text-2xl leading-snug font-semibold text-silver">
-                Supply announcement pending.
-              </p>
-            )}
+            <p className="font-mono text-[0.72rem] tracking-[0.16em] text-cyan uppercase">Token</p>
+            <p className="relative mt-3 font-display text-4xl leading-none font-bold text-silver sm:text-5xl">
+              {project.PROJECT_NAME}
+            </p>
+            <p className="relative mt-3 font-mono text-lg text-cyan">{project.DISPLAY_TICKER}</p>
             <dl className="relative mt-8 space-y-2 text-sm">
-              <div className="flex flex-wrap justify-between gap-2">
-                <dt className="text-mist">Token</dt>
-                <dd className="text-silver">{project.PROJECT_NAME}</dd>
-              </div>
-              <div className="flex flex-wrap justify-between gap-2">
-                <dt className="text-mist">Ticker</dt>
-                <dd className="font-mono text-silver">{project.DISPLAY_TICKER}</dd>
-              </div>
               <div className="flex flex-wrap justify-between gap-2">
                 <dt className="text-mist">Network</dt>
                 <dd className="text-silver">{project.NETWORK}</dd>
@@ -101,12 +86,12 @@ export function TokenSection() {
               <Fact label="Status" value={live ? "Live" : "Prelaunch"} />
               <Fact
                 label="Buy tax"
-                value={publishedValue(buyTax, live)}
+                value={buyTax ?? "To be announced"}
                 note={project.BUY_TAX?.note}
               />
               <Fact
                 label="Sell tax"
-                value={publishedValue(sellTax, live)}
+                value={sellTax ?? "To be announced"}
                 note={project.SELL_TAX?.note}
               />
               <Fact
