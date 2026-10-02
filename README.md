@@ -1,6 +1,6 @@
 # Superintelligent Vitalik
 
-A site for **Superintelligent Vitalik** (`$SIVITALIK`) on Ethereum Mainnet. It presents the artwork, a short narrative, and only the token facts that have been confirmed.
+A landing page for **Superintelligent Vitalik** (`$SIVITALIK`) on Ethereum Mainnet. The page runs from the hero through About, How to Buy, Tokenomics, and a short roadmap.
 
 The imagery is artistic. The site does not claim a working AI product, a partnership, or an endorsement.
 
@@ -65,7 +65,8 @@ These stay `null` on purpose:
 - Chart URL
 - The real X profile URL (`X_URL` currently opens https://x.com/)
 - The real Telegram URL (`TELEGRAM_URL` currently opens https://t.me/)
-- Total supply and decimals, if you want them recorded in config
+- Confirmed trading venues in `TRADING_VENUES`
+- Total supply, if you want the large supply figure shown
 - Allocation basis and category list
 - Liquidity evidence
 - Administrative controls

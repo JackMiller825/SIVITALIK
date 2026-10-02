@@ -60,6 +60,15 @@ export type OfficialChannel = {
 export type LaunchStatus = "prelaunch" | "live";
 export type AllocationBasis = "launch" | "current";
 
+export type TradingVenue = {
+  name: string;
+  /** Token-specific http(s) URL that has been checked. */
+  url: string;
+  /** Optional logo path under public/, or null for a text label. */
+  logo: string | null;
+  live: boolean;
+};
+
 export const project = {
   PROJECT_NAME: "Superintelligent Vitalik",
   TOKEN_SYMBOL: "SIVITALIK",
@@ -86,4 +95,6 @@ export const project = {
   LIQUIDITY: null as LiquidityDetail | null,
   ADMIN: null as AdminDetail | null,
   LAST_CHECKED: null as string | null,
+  /** Confirmed token listings only. An empty list hides the venues strip. */
+  TRADING_VENUES: [] as TradingVenue[],
 };

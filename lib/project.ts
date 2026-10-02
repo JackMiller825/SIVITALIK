@@ -1,4 +1,4 @@
-import { project, type AllocationItem, type OfficialChannel } from "@/config/project";
+import { project, type AllocationItem, type OfficialChannel, type TradingVenue } from "@/config/project";
 import { sumPercents, tokenShare } from "@/lib/amount";
 
 export function httpUrl(value: string | null | undefined): string | null {
@@ -69,10 +69,38 @@ function hasProfilePath(value: string | null): boolean {
 export type PublicChannel = { label: string; href: string };
 
 export function socialLinks(): PublicChannel[] {
-  return [
-    { label: "X", href: xHref() ?? "https://x.com/" },
-    { label: "Telegram", href: telegramHref() ?? "https://t.me/" },
-  ];
+  const items: PublicChannel[] = [];
+  const telegram = telegramHref();
+  const x = xHref();
+  if (telegram) items.push({ label: "Telegram", href: telegram });
+  if (x) items.push({ label: "X", href: x });
+  return items;
+}
+
+export type ResourceLink = PublicChannel & { kind: "telegram" | "x" | "explorer" | "trade" | "chart" };
+
+export function resourceLinks(): ResourceLink[] {
+  const items: ResourceLink[] = [];
+  const telegram = telegramHref();
+  const x = xHref();
+  const explorer = explorerHref();
+  const trade = buyHref();
+  const chart = chartHref();
+  if (telegram) items.push({ kind: "telegram", label: "Telegram", href: telegram });
+  if (x) items.push({ kind: "x", label: "X", href: x });
+  if (explorer) items.push({ kind: "explorer", label: "Etherscan", href: explorer });
+  if (trade) items.push({ kind: "trade", label: "Trading page", href: trade });
+  if (chart) items.push({ kind: "chart", label: "Market data", href: chart });
+  return items;
+}
+
+export function confirmedVenues(): Array<TradingVenue & { href: string }> {
+  return project.TRADING_VENUES.flatMap((venue) => {
+    const href = httpUrl(venue.url);
+    const name = venue.name.trim();
+    if (!venue.live || !href || !name) return [];
+    return [{ ...venue, name, href }];
+  });
 }
 
 export function channels(): PublicChannel[] {
@@ -90,7 +118,7 @@ export function launchAction(): { href: string; label: string; external: boolean
   if (buy) {
     return { href: buy, label: `Buy ${project.DISPLAY_TICKER}`, external: true };
   }
-  return { href: "#tokenomics", label: "View Launch Details", external: false };
+  return { href: "#tokenomics", label: "Launch Details", external: false };
 }
 
 export function secondaryAction(): { href: string; label: string; external: boolean } {
@@ -128,8 +156,8 @@ export function taxLabel(kind: "buy" | "sell"): string | null {
 }
 
 export const NAV_LINKS = [
-  { id: "experience", label: "Experience" },
-  { id: "tokenomics", label: "Tokenomics" },
+  { id: "top", label: "Home" },
+  { id: "about", label: "About" },
   { id: "how-to-buy", label: "How to Buy" },
-  { id: "community", label: "Community" },
+  { id: "tokenomics", label: "Tokenomics" },
 ] as const;

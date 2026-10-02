@@ -3,7 +3,7 @@
 import { BrandLogo } from "@/components/brand-logo";
 import { PrimaryLink } from "@/components/primary-link";
 import { project } from "@/config/project";
-import { launchAction, NAV_LINKS, socialLinks } from "@/lib/project";
+import { launchAction, NAV_LINKS } from "@/lib/project";
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
@@ -26,7 +26,6 @@ export function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuId = useId();
   const action = launchAction();
-  const socials = socialLinks();
 
   useEffect(() => {
     const elements = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
@@ -148,21 +147,6 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-1 sm:flex">
-          {socials.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring rounded-full px-2.5 py-2 text-sm text-mist hover:text-cyan"
-            >
-              {link.label}
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          ))}
-        </div>
-
         <div className="hidden md:block">
           <PrimaryLink href={action.href} external={action.external} compact>
             {action.label}
@@ -214,25 +198,11 @@ export function SiteHeader() {
                 key={link.id}
                 href={`#${link.id}`}
                 className="focus-ring rounded-2xl px-4 py-3 text-lg text-silver"
-                onClick={(event) => goSection(event, link.id)}
+                onClick={(event) => (link.id === "top" ? goTop(event) : goSection(event, link.id))}
               >
                 {link.label}
               </a>
             ))}
-            <div className="flex gap-2 px-4 py-2">
-              {socials.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring rounded-full border border-white/15 px-4 py-2 text-sm text-silver"
-                >
-                  {link.label}
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              ))}
-            </div>
             <div className="px-1 pt-2">
               {action.external ? (
                 <PrimaryLink href={action.href} external>

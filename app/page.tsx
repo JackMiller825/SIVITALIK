@@ -1,11 +1,13 @@
+import { AboutSection } from "@/components/about-section";
 import { BuySection } from "@/components/buy-section";
-import { CommunitySection } from "@/components/community-section";
-import { ExperienceSection } from "@/components/experience-section";
 import { Hero } from "@/components/hero";
-import { NarrativeSection } from "@/components/narrative-section";
+import { RoadmapSection } from "@/components/roadmap-section";
+import { SectionRule } from "@/components/section-rule";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { TokenSection } from "@/components/token-section";
+import { TradeSection } from "@/components/trade-section";
+import { VenuesSection } from "@/components/venues-section";
 
 export default function Home() {
   return (
@@ -13,11 +15,17 @@ export default function Home() {
       <SiteHeader />
       <main id="content">
         <Hero />
-        <ExperienceSection />
-        <NarrativeSection />
-        <TokenSection />
+        <VenuesSection />
+        <SectionRule />
+        <AboutSection />
+        <SectionRule />
         <BuySection />
-        <CommunitySection />
+        <SectionRule />
+        <TradeSection />
+        <SectionRule />
+        <TokenSection />
+        <SectionRule />
+        <RoadmapSection />
       </main>
       <SiteFooter />
     </>
