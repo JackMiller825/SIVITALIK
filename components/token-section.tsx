@@ -17,7 +17,7 @@ export function TokenSection() {
 
   return (
     <section id="tokenomics" className="section-scroll bg-void py-20 sm:py-28">
-      <div className="mx-auto grid max-w-[1160px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-14">
+      <div className="mx-auto grid max-w-[1240px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.28fr)_minmax(240px,0.72fr)] lg:gap-10">
         <div className="min-w-0">
           <h2 className="font-display text-[clamp(3rem,7vw,5.5rem)] leading-[0.86] font-bold text-silver uppercase">
             Tokenomics
@@ -35,7 +35,7 @@ export function TokenSection() {
               <div className="py-4">
                 <dt className="text-sm text-mist">Contract address</dt>
                 <div className="mt-1 flex items-center gap-3">
-                  <dd className="min-w-0 flex-1 overflow-x-auto font-mono text-sm whitespace-nowrap text-silver">{address}</dd>
+                  <dd className="min-w-0 flex-1 font-mono text-sm whitespace-nowrap text-silver max-sm:overflow-x-auto max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden">{address}</dd>
                   <div className="shrink-0">
                     <CopyAddress address={address} />
                   </div>
