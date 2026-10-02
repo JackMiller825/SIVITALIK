@@ -442,10 +442,6 @@ export default function ObservatoryScene({
   const settings = useMemo(() => quality(), []);
 
   useEffect(() => {
-    onReady?.();
-  }, [onReady]);
-
-  useEffect(() => {
     const element = wrapRef.current;
     if (!element) return;
     const observer = new IntersectionObserver(
@@ -480,6 +476,7 @@ export default function ObservatoryScene({
         }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x000000, 0);
+          onReady?.();
         }}
       >
         <ambientLight intensity={0.55} />
