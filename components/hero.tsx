@@ -6,6 +6,7 @@ import { PrimaryLink } from "@/components/primary-link";
 import { project } from "@/config/project";
 import { buyHref, telegramHref } from "@/lib/project";
 import { useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const NODES = Array.from({ length: 12 }, (_, index) => {
@@ -90,9 +91,20 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-[100svh] overflow-hidden"
+      className="relative isolate overflow-hidden"
       onPointerMove={onHeroMove}
     >
+      <figure className="relative z-10 px-0 pt-20">
+        <Image
+          src="/brand/banner.webp"
+          alt="Banner artwork for Superintelligent Vitalik. A portrait with a neural crown stands beside the title. Across the sky are a brain and processor, an Ethereum crystal, and a linked globe. Below, a human hand meets a robotic hand, with a future city and people on a hill."
+          width={2000}
+          height={667}
+          priority
+          sizes="100vw"
+          className="aspect-[3/1] h-auto w-full object-cover"
+        />
+      </figure>
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_35%,rgba(139,61,255,0.22),transparent_58%),radial-gradient(ellipse_at_10%_80%,rgba(53,223,255,0.1),transparent_46%)]" />
         <div className="hero-grid absolute inset-0" />
@@ -108,7 +120,7 @@ export function Hero() {
         <HeroField reduced={reduced} />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1240px] items-center gap-12 px-5 pt-28 pb-20 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:pt-32 lg:pb-24">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1240px] items-center gap-12 px-5 pt-16 pb-20 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:pt-20 lg:pb-24">
         <div className="@container min-w-0 max-w-xl">
           <p className="rise-in font-mono text-[0.72rem] tracking-[0.22em] text-cyan uppercase">
             {project.NETWORK} · Observatory
@@ -221,7 +233,7 @@ export function Hero() {
             <div className="absolute top-1/2 left-1/2 w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[linear-gradient(160deg,#eaf0ff,#8b3dff_42%,#35dfff)] p-[3px] shadow-[0_0_36px_rgba(139,61,255,0.45)]">
               <BrandLogo
                 priority
-                alt="Superintelligent Vitalik emblem: a portrait in a violet ring, with the project name and the ticker $SIVITALIK."
+                alt="Superintelligent Vitalik emblem: a portrait in a violet ring, with a crystal crown and an Ethereum diamond."
                 sizes="(max-width: 1024px) 70vw, 420px"
                 className="aspect-square h-auto w-full rounded-full"
               />

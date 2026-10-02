@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/magnetic";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 const solid =
   "h-12 cursor-pointer rounded-full bg-primary px-6 text-base text-primary-foreground shadow-[0_0_0_1px_rgba(53,223,255,0.35),0_12px_32px_rgba(139,61,255,0.28)] hover:bg-[#9b57ff] focus-visible:ring-[#35dfff]";
@@ -17,12 +17,14 @@ export function PrimaryLink({
   external = false,
   tone = "solid",
   compact = false,
+  onClick,
 }: {
   href: string;
   children: ReactNode;
   external?: boolean;
   tone?: "solid" | "quiet";
   compact?: boolean;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return (
     <Magnetic>
@@ -31,6 +33,7 @@ export function PrimaryLink({
         render={
           <a
             href={href}
+            onClick={onClick}
             {...(external
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}

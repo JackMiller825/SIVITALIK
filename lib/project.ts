@@ -81,7 +81,6 @@ export function allocationView(items: Allocation[] = project.ALLOCATIONS) {
 
 export const NAV_LINKS = [
   { id: "experience", label: "Experience" },
-  { id: "narrative", label: "Narrative" },
   { id: "token", label: "Token" },
   { id: "how-to-buy", label: "How to Buy" },
   { id: "community", label: "Community" },

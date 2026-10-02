@@ -148,15 +148,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          {buy ? (
-            <PrimaryLink href={buy} external compact>
-              Buy {project.TOKEN_SYMBOL}
-            </PrimaryLink>
-          ) : (
-            <PrimaryLink href="#how-to-buy" tone="quiet" compact>
-              Prelaunch
-            </PrimaryLink>
-          )}
+          <PrimaryLink href={buy ?? "#how-to-buy"} external={Boolean(buy)} compact>
+            Buy {project.TOKEN_SYMBOL}
+          </PrimaryLink>
         </div>
 
         <button
@@ -207,13 +201,9 @@ export function SiteHeader() {
                   Buy {project.TOKEN_SYMBOL}
                 </PrimaryLink>
               ) : (
-                <a
-                  href="#how-to-buy"
-                  className="focus-ring inline-flex h-12 items-center rounded-full border border-white/15 px-5 text-silver"
-                  onClick={(event) => goSection(event, "how-to-buy")}
-                >
-                  Prelaunch
-                </a>
+                <PrimaryLink href="#how-to-buy" onClick={(event) => goSection(event, "how-to-buy")}>
+                  Buy {project.TOKEN_SYMBOL}
+                </PrimaryLink>
               )}
             </div>
           </nav>

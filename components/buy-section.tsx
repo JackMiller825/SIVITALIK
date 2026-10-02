@@ -1,6 +1,6 @@
 import { PrimaryLink } from "@/components/primary-link";
 import { project } from "@/config/project";
-import { buyHref, tradingAnnounced } from "@/lib/project";
+import { buyHref } from "@/lib/project";
 
 const STEPS = [
   {
@@ -22,30 +22,19 @@ const STEPS = [
 ];
 
 export function BuySection() {
-  const ready = tradingAnnounced();
   const buy = buyHref();
   const address = project.CONTRACT_ADDRESS.trim();
 
   return (
     <section id="how-to-buy" className="section-scroll bg-void py-20 sm:py-28">
       <div className="mx-auto max-w-[980px] px-5 sm:px-8">
-        <p className="font-mono text-[0.72rem] tracking-[0.22em] text-cyan uppercase">04 — Acquire</p>
+        <p className="font-mono text-[0.72rem] tracking-[0.22em] text-cyan uppercase">03 — Acquire</p>
         <h2 className="mt-3 font-display text-[clamp(2.6rem,6vw,4.8rem)] leading-[0.9] font-bold text-silver">
           How to Buy
         </h2>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-mist">
           Four steps for a first purchase on Ethereum. You can read them without connecting a wallet.
         </p>
-
-        {!ready ? (
-          <p className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-base text-silver">
-            Trading details will appear here when announced.
-          </p>
-        ) : (
-          <p className="mt-8 text-base text-mist">
-            The contract and trading link below are the ones published for this launch.
-          </p>
-        )}
 
         <ol className="mt-8 space-y-4">
           {STEPS.map((step, index) => (

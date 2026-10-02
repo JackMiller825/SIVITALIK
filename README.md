@@ -25,11 +25,11 @@ Optimized copies live in `public/brand/`.
 | File | Role |
 | --- | --- |
 | `public/brand/logo.webp` | Circular emblem in the navigation, hero, core, and footer |
-| `public/brand/banner.webp` | Full panoramic artwork in the Narrative section |
+| `public/brand/banner.webp` | Full-width 3:1 artwork at the top of the first screen |
 | `app/icon.png` | Browser tab icon |
 | `app/apple-icon.png` | Apple touch icon |
 
-Keep the full artwork. Do not crop the name, ticker, portrait, or the banner’s main symbols. After replacing a file, use the same filename or update the `src` in `components/brand-logo.tsx` and `components/narrative-section.tsx`.
+Keep the full artwork. Do not crop the name, portrait, or the banner’s main symbols. After replacing a file, use the same filename or update the `src` in `components/brand-logo.tsx` and `components/hero.tsx`.
 
 A wide banner should stay near a 3:1 ratio so the page does not stretch it. The logo should stay square.
 
@@ -37,7 +37,7 @@ A wide banner should stay near a 3:1 ratio so the page does not stretch it. The 
 
 Edit only `config/project.ts`.
 
-Leave a string empty when a fact is not public yet. The page shows **Not announced** or hides the control. Do not invent market cap, holders, volume, price, audits, listings, locks, burns, or renounced ownership.
+Leave a string empty when a fact is not public yet. The token panel shows the name, ticker, and network. Do not invent market cap, holders, volume, price, audits, listings, locks, burns, or renounced ownership.
 
 | Field | What to enter |
 | --- | --- |
@@ -55,7 +55,7 @@ Leave a string empty when a fact is not public yet. The page shows **Not announc
 | `ADMIN_CONTROLS` | Ownership or admin powers, in plain language, or empty |
 | `LAUNCH_STATUS` | `"prelaunch"` or `"live"` |
 
-The **Buy $SIVITALIK** button appears only when `LAUNCH_STATUS` is `"live"` and `BUY_URL` is an `http` or `https` link. The How to Buy notice stays until that is true **and** `CONTRACT_ADDRESS` is set.
+The navigation button is always labeled **Buy $SIVITALIK**. When `BUY_URL` is an `http` or `https` link and `LAUNCH_STATUS` is `"live"`, that button opens the trading page. Otherwise it scrolls to How to Buy.
 
 Allocation bars are drawn from the percentages you enter. If they do not add up to 100, the site says so instead of silently filling the gap.
 
@@ -72,11 +72,6 @@ These fields are empty on purpose:
 - Telegram URL
 - X URL
 - Any other official channel
-- Total supply
-- Buy tax and sell tax
-- Allocation breakdown
-- Liquidity status
-- Ownership or admin controls
-- `LAUNCH_STATUS` set to `"live"` only after the trading link is verified
+- `LAUNCH_STATUS` set to `"live"` and `BUY_URL` filled after the trading link is verified
 
 No launch date is configured, so the site does not show a countdown.

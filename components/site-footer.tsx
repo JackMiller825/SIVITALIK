@@ -76,14 +76,6 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-12 max-w-[1180px] space-y-3 border-t border-white/10 pt-6 text-sm leading-relaxed text-mist">
-        <p>
-          An independent meme project inspired by Vitalik Buterin. Not affiliated with or endorsed by Vitalik Buterin or the Ethereum Foundation.
-        </p>
-        <p>
-          Crypto assets are volatile and can lose value. This website does not promise returns, profits, or future performance.
-        </p>
-      </div>
     </footer>
   );
 }

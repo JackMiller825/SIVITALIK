@@ -136,7 +136,7 @@ export function CommunitySection() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(4,6,21,0.2),rgba(4,6,21,0.78)_62%,#040615)]" />
       <div className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8">
         <div className="rounded-[28px] border border-white/12 bg-[#040615]/75 px-6 py-10 text-center shadow-[0_0_80px_rgba(139,61,255,0.16)] backdrop-blur-md sm:px-10">
-          <p className="font-mono text-[0.72rem] tracking-[0.22em] text-cyan uppercase">05 — Community</p>
+          <p className="font-mono text-[0.72rem] tracking-[0.22em] text-cyan uppercase">04 — Community</p>
           <h2 className="mt-3 font-display text-[clamp(2.7rem,7vw,5rem)] leading-[0.88] font-bold text-silver">
             Join the Constellation
           </h2>
@@ -162,11 +162,7 @@ export function CommunitySection() {
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="mt-8 text-base text-silver">
-              Official community links will be announced here.
-            </p>
-          )}
+          ) : null}
         </div>
       </div>
     </section>
