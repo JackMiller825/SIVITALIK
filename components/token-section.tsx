@@ -35,8 +35,10 @@ export function TokenSection() {
               <div className="py-4">
                 <dt className="text-sm text-mist">Contract address</dt>
                 <div className="mt-1 flex items-center gap-3">
-                  <dd className="min-w-0 flex-1 font-mono text-sm break-all text-silver">{address}</dd>
-                  <CopyAddress address={address} />
+                  <dd className="min-w-0 flex-1 overflow-x-auto font-mono text-sm whitespace-nowrap text-silver">{address}</dd>
+                  <div className="shrink-0">
+                    <CopyAddress address={address} />
+                  </div>
                 </div>
                 {explorer ? (
                   <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring mt-3 inline-block text-sm text-cyan underline-offset-4 hover:underline">
