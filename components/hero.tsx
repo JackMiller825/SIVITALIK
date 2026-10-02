@@ -5,16 +5,14 @@ import { PrimaryLink } from "@/components/primary-link";
 import { ResourceIcon } from "@/components/resource-icon";
 import { project } from "@/config/project";
 import { assets } from "@/lib/assets";
-import { confirmedVenues, launchAction, resourceLinks } from "@/lib/project";
+import { buyHref, resourceLinks } from "@/lib/project";
 import { useReducedMotion } from "motion/react";
 import Image from "next/image";
 
 export function Hero() {
   const reduced = useReducedMotion();
-  const primary = launchAction();
+  const buy = buyHref();
   const resources = resourceLinks();
-  const live = project.LAUNCH_STATUS === "live";
-  const hasVenues = confirmedVenues().length > 0;
 
   function onMove(event: React.PointerEvent<HTMLElement>) {
     if (reduced || event.pointerType !== "mouse") return;
@@ -73,9 +71,6 @@ export function Hero() {
           <p className="mt-5 max-w-lg text-base leading-relaxed text-silver sm:text-lg">
             Meet {project.DISPLAY_TICKER}: a meme-token identity where neural crowns, crystalline worlds, and internet culture collide.
           </p>
-          {!hasVenues ? (
-            <p className="mt-4 text-sm text-mist">{live ? "Trading is live." : "Prelaunch. Trading venues are not confirmed yet."}</p>
-          ) : null}
           {resources.length > 0 ? (
             <ul className="mt-6 flex flex-wrap gap-2">
               {resources.map((item) => (
@@ -94,11 +89,13 @@ export function Hero() {
               ))}
             </ul>
           ) : null}
-          <div className="mt-8">
-            <PrimaryLink href={primary.href} external={primary.external}>
-              {primary.label}
-            </PrimaryLink>
-          </div>
+          {buy ? (
+            <div className="mt-8">
+              <PrimaryLink href={buy} external>
+                Buy {project.DISPLAY_TICKER}
+              </PrimaryLink>
+            </div>
+          ) : null}
         </div>
 
         <div className="relative mx-auto w-full max-w-[520px]">

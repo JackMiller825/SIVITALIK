@@ -147,11 +147,13 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <PrimaryLink href={action.href} external={action.external} compact>
-            {action.label}
-          </PrimaryLink>
-        </div>
+        {action.external ? (
+          <div className="hidden md:block">
+            <PrimaryLink href={action.href} external compact>
+              {action.label}
+            </PrimaryLink>
+          </div>
+        ) : null}
 
         <button
           ref={toggleRef}
@@ -203,20 +205,13 @@ export function SiteHeader() {
                 {link.label}
               </a>
             ))}
-            <div className="px-1 pt-2">
-              {action.external ? (
+            {action.external ? (
+              <div className="px-1 pt-2">
                 <PrimaryLink href={action.href} external>
                   {action.label}
                 </PrimaryLink>
-              ) : (
-                <PrimaryLink
-                  href={action.href}
-                  onClick={(event) => goSection(event, action.href.replace("#", ""))}
-                >
-                  {action.label}
-                </PrimaryLink>
-              )}
-            </div>
+              </div>
+            ) : null}
           </nav>
         </div>
       ) : null}

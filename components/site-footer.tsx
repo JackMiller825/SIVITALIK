@@ -32,11 +32,6 @@ export function SiteFooter() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a href="#roadmap" className="focus-ring rounded-sm text-sm text-silver hover:text-cyan">
-                  Roadmap
-                </a>
-              </li>
             </ul>
           </nav>
           {socials.length > 0 ? (

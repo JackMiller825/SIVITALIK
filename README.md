@@ -1,6 +1,6 @@
 # Superintelligent Vitalik
 
-A landing page for **Superintelligent Vitalik** (`$SIVITALIK`) on Ethereum Mainnet. The page runs from the hero through About, How to Buy, Tokenomics, and a short roadmap.
+A landing page for **Superintelligent Vitalik** (`$SIVITALIK`) on Ethereum Mainnet. The page runs from the hero through About, How to Buy, and Tokenomics.
 
 The imagery is artistic. The site does not claim a working AI product, a partnership, or an endorsement.
 
@@ -44,7 +44,7 @@ Unknown values stay `null`. Do not substitute `0`, an empty string, or a sample 
 
 Trading is live only when `LAUNCH_STATUS` is `"live"` and `BUY_URL` is a real `http` or `https` link. A contract address by itself does not turn on the buy button.
 
-Until then, the navigation action is **View Launch Details** and it scrolls to Tokenomics. When trading is verified, that action becomes **Buy $SIVITALIK** and opens `BUY_URL`.
+When trading is verified, the navigation action is **Buy $SIVITALIK** and opens `BUY_URL`. Until then that button stays hidden.
 
 `SITE_ORIGIN` is the public `https` origin used for share metadata, such as `https://example.com`. Leave it `null` until that domain exists. Local hosts are never written into the share image URL.
 

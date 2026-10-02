@@ -1,3 +1,4 @@
+import { CopyAddress } from "@/components/copy-address";
 import { project } from "@/config/project";
 import { assets } from "@/lib/assets";
 import { groupInteger } from "@/lib/amount";
@@ -11,6 +12,7 @@ export function TokenSection() {
   const liquidity = project.LIQUIDITY;
   const admin = project.ADMIN;
   const address = project.CONTRACT_ADDRESS?.trim() || null;
+  const liquidityAmount = project.LIQUIDITY_AMOUNT?.trim() || null;
   const explorer = explorerHref();
 
   return (
@@ -31,7 +33,31 @@ export function TokenSection() {
           <dl className="mt-8 divide-y divide-white/10 rounded-[28px] border border-white/10 bg-[#0b1028] px-5 sm:px-6">
             <Fact label="Buy tax" value={buyTax ?? "To be announced"} note={project.BUY_TAX?.note} />
             <Fact label="Sell tax" value={sellTax ?? "To be announced"} note={project.SELL_TAX?.note} />
-            <Fact label="Liquidity" value={liquidity ? liquidityText(liquidity.status) : "Details pending"} />
+            <Fact
+              label="Liquidity"
+              value={
+                liquidityAmount
+                  ? groupInteger(liquidityAmount)
+                  : liquidity
+                    ? liquidityText(liquidity.status)
+                    : "Details pending"
+              }
+            />
+            {address ? (
+              <div className="py-4">
+                <dt className="text-sm text-mist">Contract address</dt>
+                <dd className="mt-1 font-mono text-sm break-all text-silver">{address}</dd>
+                <div className="mt-3">
+                  <CopyAddress address={address} />
+                </div>
+                {explorer ? (
+                  <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring mt-3 inline-block text-sm text-cyan underline-offset-4 hover:underline">
+                    View on Etherscan
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
             <div className="py-4">
               <dt className="text-sm text-mist">Contract controls</dt>
               <dd className="mt-1 text-base leading-relaxed text-silver">
@@ -58,20 +84,6 @@ export function TokenSection() {
           ) : null}
           {liquidity?.status === "burned" ? (
             <p className="mt-2 text-sm text-mist">Burning LP tokens is separate from burning {project.DISPLAY_TICKER} supply.</p>
-          ) : null}
-          {address ? (
-            <p className="mt-4 font-mono text-sm break-all text-mist">
-              Token contract: {address}
-              {explorer ? (
-                <>
-                  {" "}
-                  <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring text-cyan underline-offset-4 hover:underline">
-                    View on Etherscan
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </>
-              ) : null}
-            </p>
           ) : null}
         </div>
         <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[#070b1c]">

@@ -77,7 +77,8 @@ export const project = {
   TOKEN_STANDARD: null as string | null,
   SITE_ORIGIN: null as string | null,
   LAUNCH_STATUS: "prelaunch" as LaunchStatus,
-  CONTRACT_ADDRESS: null as string | null,
+  /** Temporary token contract. Replace with the final address when it is confirmed. */
+  CONTRACT_ADDRESS: "0x56D487B457813B6aD8Bd885AB437526E038D3B7C" as string | null,
   POOL_ADDRESS: null as string | null,
   EXPLORER_URL: null as string | null,
   BUY_URL: null as string | null,
@@ -86,13 +87,15 @@ export const project = {
   TELEGRAM_URL: "https://t.me/" as string | null,
   X_URL: "https://x.com/" as string | null,
   OTHER_CHANNELS: [] as OfficialChannel[],
-  TOTAL_SUPPLY: null as string | null,
+  TOTAL_SUPPLY: "1000000000" as string | null,
   DECIMALS: null as number | null,
   BUY_TAX: { percent: 0, note: null } as TaxDetail | null,
   SELL_TAX: { percent: 0, note: null } as TaxDetail | null,
   ALLOCATION_BASIS: null as AllocationBasis | null,
   ALLOCATIONS: null as AllocationItem[] | null,
   LIQUIDITY: null as LiquidityDetail | null,
+  /** Whole-token liquidity figure. Null hides the number and falls back to status text. */
+  LIQUIDITY_AMOUNT: "1000000000" as string | null,
   ADMIN: null as AdminDetail | null,
   LAST_CHECKED: null as string | null,
   /** Confirmed token listings only. An empty list hides the venues strip. */
