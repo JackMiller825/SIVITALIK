@@ -96,6 +96,15 @@ export function SiteHeader() {
     history.replaceState(null, "", "#top");
   }
 
+  function goSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    event.preventDefault();
+    setOpen(false);
+    window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      history.replaceState(null, "", `#${id}`);
+    }, 0);
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <div
@@ -179,7 +188,7 @@ export function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-label="Primary"
-          className="menu-in fixed inset-x-3 top-[4.6rem] z-50 rounded-3xl border border-white/12 bg-[#070b1c]/95 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl lg:hidden"
+          className="menu-in fixed inset-x-3 top-[4.6rem] z-[70] rounded-3xl border border-white/12 bg-[#070b1c] p-3 opacity-100 shadow-[0_24px_80px_rgba(0,0,0,0.55)] lg:hidden"
         >
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
@@ -187,7 +196,7 @@ export function SiteHeader() {
                 key={link.id}
                 href={`#${link.id}`}
                 className="focus-ring rounded-2xl px-4 py-3 text-lg text-silver"
-                onClick={() => setOpen(false)}
+                onClick={(event) => goSection(event, link.id)}
               >
                 {link.label}
               </a>
@@ -201,7 +210,7 @@ export function SiteHeader() {
                 <a
                   href="#how-to-buy"
                   className="focus-ring inline-flex h-12 items-center rounded-full border border-white/15 px-5 text-silver"
-                  onClick={() => setOpen(false)}
+                  onClick={(event) => goSection(event, "how-to-buy")}
                 >
                   Prelaunch
                 </a>

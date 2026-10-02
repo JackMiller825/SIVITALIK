@@ -36,17 +36,24 @@ export function ExperienceSection() {
   useEffect(() => {
     if (reduced) return;
     if (!hasWebGL()) return;
-    const start = () => setEnable3d(true);
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      setEnable3d(true);
+    };
+    // The hero network keeps a frame loop running, so an idle callback with
+    // no deadline may never fire. A short timeout still mounts the core.
+    const timeout = window.setTimeout(start, 600);
     const browser = window as Window & {
-      requestIdleCallback?: (callback: () => void) => number;
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
       cancelIdleCallback?: (id: number) => void;
     };
-    if (browser.requestIdleCallback) {
-      const id = browser.requestIdleCallback(start);
-      return () => browser.cancelIdleCallback?.(id);
-    }
-    const id = window.setTimeout(start, 450);
-    return () => window.clearTimeout(id);
+    const idle = browser.requestIdleCallback?.(start, { timeout: 600 });
+    return () => {
+      window.clearTimeout(timeout);
+      if (idle !== undefined) browser.cancelIdleCallback?.(idle);
+    };
   }, [reduced]);
 
   function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {

@@ -11,10 +11,9 @@ import { useEffect, useRef } from "react";
 const NODES = Array.from({ length: 12 }, (_, index) => {
   const angle = (index / 12) * Math.PI * 2 - Math.PI / 2;
   const radius = index % 2 === 0 ? 43 : 46.5;
-  return {
-    x: 50 + Math.cos(angle) * radius,
-    y: 50 + Math.sin(angle) * radius * 0.94,
-  };
+  const x = (50 + Math.cos(angle) * radius).toFixed(2);
+  const y = (50 + Math.sin(angle) * radius * 0.94).toFixed(2);
+  return { left: `${x}%`, top: `${y}%`, x: Number(x), y: Number(y) };
 });
 
 export function Hero() {
@@ -209,12 +208,12 @@ export function Hero() {
             <div className="pointer-events-none absolute inset-0" aria-hidden="true">
               {NODES.map((node, index) => (
                 <span
-                  key={`${node.x}-${node.y}`}
+                  key={`${node.left}-${node.top}`}
                   ref={(element) => {
                     nodeRefs.current[index] = element;
                   }}
                   className="absolute size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan shadow-[0_0_10px_#35dfff] transition duration-200"
-                  style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                  style={{ left: node.left, top: node.top }}
                 />
               ))}
             </div>

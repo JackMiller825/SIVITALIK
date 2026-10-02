@@ -1,6 +1,10 @@
 import { CORE_MODES, type CoreMode } from "@/lib/core-modes";
 import { cn } from "@/lib/utils";
 
+function coord(value: number) {
+  return value.toFixed(2);
+}
+
 function Intelligence() {
   const rings = [112, 150, 184];
   return (
@@ -11,9 +15,9 @@ function Intelligence() {
       {rings.flatMap((radius, ring) =>
         Array.from({ length: 8 + ring * 2 }, (_, index) => {
           const angle = (index / (8 + ring * 2)) * Math.PI * 2 + ring * 0.4;
-          const x = 200 + Math.cos(angle) * radius;
-          const y = 200 + Math.sin(angle) * radius;
-          return <circle key={`${radius}-${index}`} cx={x} cy={y} r={ring === 2 ? 3.2 : 2.4} fill="#35DFFF" />;
+          const x = coord(200 + Math.cos(angle) * radius);
+          const y = coord(200 + Math.sin(angle) * radius);
+          return <circle key={`${radius}-${index}`} cx={x} cy={y} r={ring === 2 ? "3.2" : "2.4"} fill="#35DFFF" />;
         }),
       )}
       <path d="M200 88 L248 150 L152 150 Z" fill="none" stroke="#8B3DFF" strokeWidth="1.2" />
@@ -79,8 +83,8 @@ function Community() {
       <ellipse cx="200" cy="200" rx="168" ry="120" fill="none" stroke="rgba(53,223,255,0.28)" strokeWidth="1" />
       {Array.from({ length: 18 }, (_, index) => {
         const angle = (index / 18) * Math.PI * 2;
-        const x = 200 + Math.cos(angle) * 168;
-        const y = 200 + Math.sin(angle) * 168;
+        const x = coord(200 + Math.cos(angle) * 168);
+        const y = coord(200 + Math.sin(angle) * 168);
         return <circle key={index} cx={x} cy={y} r="3" fill={index % 3 === 0 ? "#8B3DFF" : "#35DFFF"} />;
       })}
     </>
