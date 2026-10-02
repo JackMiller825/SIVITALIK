@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Big_Shoulders, IBM_Plex_Mono, Outfit } from "next/font/google";
+import { headers } from "next/headers";
 import type { ReactNode } from "react";
+import { project } from "@/config/project";
+import { assets } from "@/lib/assets";
+import { publicSiteOrigin } from "@/lib/project";
 import "./globals.css";
 
 const display = Big_Shoulders({
@@ -27,30 +31,43 @@ const mono = IBM_Plex_Mono({
 });
 
 const description =
-  "An Ethereum meme token inspired by superintelligence, digital culture, and the possibilities of human–AI collaboration.";
+  "An Ethereum meme token inspired by superintelligence, digital culture, and human–AI collaboration.";
 
-export const metadata: Metadata = {
-  title: "Superintelligent Vitalik ($SIVITALIK)",
-  description,
-  openGraph: {
-    title: "Superintelligent Vitalik ($SIVITALIK)",
+const title = `${project.PROJECT_NAME} (${project.DISPLAY_TICKER})`;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const headerList = await headers();
+  const host = headerList.get("x-forwarded-host") ?? headerList.get("host");
+  const origin = publicSiteOrigin(host, headerList.get("x-forwarded-proto"));
+  const shareImage = origin
+    ? {
+        url: `${origin}${assets.socialPreview.src}`,
+        width: assets.socialPreview.width,
+        height: assets.socialPreview.height,
+        alt: `${project.PROJECT_NAME}, ${project.DISPLAY_TICKER}`,
+      }
+    : null;
+
+  return {
+    title,
     description,
-    images: [
-      {
-        url: "/brand/banner.webp",
-        width: 2000,
-        height: 667,
-        alt: "Superintelligent Vitalik banner",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Superintelligent Vitalik ($SIVITALIK)",
-    description: "Ethereum culture. Artificial imagination.",
-    images: ["/brand/banner.webp"],
-  },
-};
+    ...(origin ? { metadataBase: new URL(origin) } : {}),
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: project.PROJECT_NAME,
+      ...(origin ? { url: origin } : {}),
+      ...(shareImage ? { images: [shareImage] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(shareImage ? { images: [shareImage.url] } : {}),
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#040615",

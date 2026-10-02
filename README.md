@@ -1,6 +1,6 @@
 # Superintelligent Vitalik
 
-A cinematic site for **Superintelligent Vitalik** (`$SIVITALIK`) on Ethereum. It introduces the name, the ticker, the banner’s symbolism, and a place for verified token details.
+A site for **Superintelligent Vitalik** (`$SIVITALIK`) on Ethereum Mainnet. It presents the artwork, a short narrative, and only the token facts that have been confirmed.
 
 The imagery is artistic. The site does not claim a working AI product, a partnership, or an endorsement.
 
@@ -18,60 +18,57 @@ npm run lint
 npm run build
 ```
 
-## Replace the logo and banner
+## Artwork
 
-Optimized copies live in `public/brand/`.
+Optimized files live in `public/brand/`. Originals are kept in `assets/brand/originals/`.
 
 | File | Role |
 | --- | --- |
-| `public/brand/logo.webp` | Circular emblem in the navigation, hero, core, and footer |
-| `public/brand/banner.webp` | Full-width 3:1 artwork at the top of the first screen |
-| `app/icon.png` | Browser tab icon |
-| `app/apple-icon.png` | Apple touch icon |
+| `hero-character.webp` | Transparent figure in the hero |
+| `hero-background.webp` | Landscape behind the hero |
+| `social-preview.jpg` | 1200×630 share image |
+| `scene-intelligence.webp` | Intelligence scene |
+| `scene-ethereum.webp` | Ethereum scene, also a small tokenomics decoration |
+| `scene-humanity.webp` | Humanity scene |
+| `scene-community.webp` | Community scene and the closing invitation |
+| `banner.webp` | Narrative banner at its natural ratio |
+| `logo.webp` | Circular logo in the navigation and footer |
 
-Keep the full artwork. Do not crop the name, portrait, or the banner’s main symbols. After replacing a file, use the same filename or update the `src` in `components/brand-logo.tsx` and `components/hero.tsx`.
+Do not stretch these files or place new text over the banner or the share image.
 
-A wide banner should stay near a 3:1 ratio so the page does not stretch it. The logo should stay square.
-
-## Add verified token details
+## Configuration
 
 Edit only `config/project.ts`.
 
-Leave a string empty when a fact is not public yet. The token panel shows the name, ticker, and network. Do not invent market cap, holders, volume, price, audits, listings, locks, burns, or renounced ownership.
+Unknown values stay `null`. Do not substitute `0`, an empty string, or a sample number. A buy or sell tax of `0` is published only when the token actually charges no tax.
 
-| Field | What to enter |
-| --- | --- |
-| `CONTRACT_ADDRESS` | The full token contract, after it is deployed |
-| `EXPLORER_URL` | `https://` link to that contract on a block explorer |
-| `BUY_URL` | `https://` link to the trading page you have checked |
-| `CHART_URL` | Optional `https://` chart link. Leave empty to hide it |
-| `TELEGRAM_URL` | Official Telegram invite, or empty |
-| `X_URL` | Official X profile, or empty |
-| `OTHER_CHANNELS` | Extra official links: `{ label, url }` |
-| `TOTAL_SUPPLY` | Exact supply text, or empty |
-| `BUY_TAX` / `SELL_TAX` | Exact tax text, or empty |
-| `ALLOCATIONS` | Real shares only, for example `{ label: "Liquidity", percent: 90 }` |
-| `LIQUIDITY_DETAILS` | What is actually known about liquidity, or empty |
-| `ADMIN_CONTROLS` | Ownership or admin powers, in plain language, or empty |
-| `LAUNCH_STATUS` | `"prelaunch"` or `"live"` |
+Trading is live only when `LAUNCH_STATUS` is `"live"` and `BUY_URL` is a real `http` or `https` link. A contract address by itself does not turn on the buy button.
 
-The navigation button is always labeled **Buy $SIVITALIK**. When `BUY_URL` is an `http` or `https` link and `LAUNCH_STATUS` is `"live"`, that button opens the trading page. Otherwise it scrolls to How to Buy.
+Until then, the navigation action is **View Launch Details** and it scrolls to Tokenomics. When trading is verified, that action becomes **Buy $SIVITALIK** and opens `BUY_URL`.
 
-Allocation bars are drawn from the percentages you enter. If they do not add up to 100, the site says so instead of silently filling the gap.
+`SITE_ORIGIN` is the public `https` origin used for share metadata, such as `https://example.com`. Leave it `null` until that domain exists. Local hosts are never written into the share image URL.
 
-There is no wallet connection. Do not add one unless you intend to.
+`TOTAL_SUPPLY` and allocation percents are exact decimal strings. Token amounts are calculated in integers.
+
+There is no wallet connection. A purchase happens on the published trading page.
 
 ## Still needed before launch
 
-These fields are empty on purpose:
+These stay `null` on purpose:
 
-- Contract address
+- Token standard, if you want it named
+- Public site origin
+- Token contract address
+- Pool or pair address
 - Block explorer URL
 - Trading URL
-- Chart URL, if you want one
-- Telegram URL
-- X URL
-- Any other official channel
-- `LAUNCH_STATUS` set to `"live"` and `BUY_URL` filled after the trading link is verified
+- Chart URL
+- Telegram, X, and any other official channel
+- Total supply and decimals
+- Buy tax and sell tax
+- Allocation basis and category list
+- Liquidity evidence
+- Administrative controls
+- `LAUNCH_STATUS` set to `"live"` only after the trading link is verified
 
 No launch date is configured, so the site does not show a countdown.

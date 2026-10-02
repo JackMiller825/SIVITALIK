@@ -5,7 +5,7 @@ import { channels, explorerHref, NAV_LINKS } from "@/lib/project";
 export function SiteFooter() {
   const socials = channels();
   const explorer = explorerHref();
-  const address = project.CONTRACT_ADDRESS.trim();
+  const address = project.CONTRACT_ADDRESS?.trim() || null;
 
   return (
     <footer className="border-t border-white/10 bg-[#070914] px-5 py-14 sm:px-8">
@@ -17,11 +17,11 @@ export function SiteFooter() {
               <p className="font-display text-2xl leading-none font-bold text-silver">
                 {project.PROJECT_NAME}
               </p>
-              <p className="mt-1 font-mono text-sm text-cyan">{project.TOKEN_SYMBOL}</p>
+              <p className="mt-1 font-mono text-sm text-cyan">{project.DISPLAY_TICKER}</p>
             </div>
           </div>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-mist">
-            An Ethereum meme token inspired by superintelligence, digital culture, and the possibilities of human–AI collaboration.
+            An Ethereum meme token inspired by superintelligence, digital culture, and human–AI collaboration.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">

@@ -3,7 +3,7 @@
 import { BrandLogo } from "@/components/brand-logo";
 import { PrimaryLink } from "@/components/primary-link";
 import { project } from "@/config/project";
-import { buyHref, NAV_LINKS } from "@/lib/project";
+import { launchAction, NAV_LINKS } from "@/lib/project";
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
@@ -25,7 +25,7 @@ export function SiteHeader() {
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuId = useId();
-  const buy = buyHref();
+  const action = launchAction();
 
   useEffect(() => {
     const elements = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
@@ -148,8 +148,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <PrimaryLink href={buy ?? "#how-to-buy"} external={Boolean(buy)} compact>
-            Buy {project.TOKEN_SYMBOL}
+          <PrimaryLink href={action.href} external={action.external} compact>
+            {action.label}
           </PrimaryLink>
         </div>
 
@@ -176,6 +176,14 @@ export function SiteHeader() {
       </div>
 
       {open ? (
+        <button
+          type="button"
+          className="fixed inset-0 z-[60] bg-[#040615]/92 lg:hidden"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        />
+      ) : null}
+      {open ? (
         <div
           id={menuId}
           ref={panelRef}
@@ -196,13 +204,16 @@ export function SiteHeader() {
               </a>
             ))}
             <div className="px-1 pt-2">
-              {buy ? (
-                <PrimaryLink href={buy} external>
-                  Buy {project.TOKEN_SYMBOL}
+              {action.external ? (
+                <PrimaryLink href={action.href} external>
+                  {action.label}
                 </PrimaryLink>
               ) : (
-                <PrimaryLink href="#how-to-buy" onClick={(event) => goSection(event, "how-to-buy")}>
-                  Buy {project.TOKEN_SYMBOL}
+                <PrimaryLink
+                  href={action.href}
+                  onClick={(event) => goSection(event, action.href.replace("#", ""))}
+                >
+                  {action.label}
                 </PrimaryLink>
               )}
             </div>

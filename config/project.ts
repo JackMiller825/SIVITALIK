@@ -1,18 +1,55 @@
 /**
- * Public project facts. This is the only place to edit them.
+ * Public project facts. Edit this file only.
  *
- * Leave unknown strings empty. Do not add guessed prices, holders, audits,
- * listings, locks, or partnerships. The site treats empty fields as unannounced.
+ * Unknown values stay null. Do not substitute 0, an empty string, or a sample
+ * number. A buy tax of 0% is published only when the token actually charges no tax.
  *
- * Buy controls turn on only when LAUNCH_STATUS is "live" and BUY_URL is an
- * http(s) link. Set both after the trading page is verified.
+ * Trading is live only when LAUNCH_STATUS is "live" and BUY_URL is a real http(s)
+ * link. A contract address alone does not mean trading has started.
+ *
+ * TOTAL_SUPPLY is the whole-token supply as a decimal string, such as "1000000000".
+ * Allocation percent strings are exact, such as "40" or "12.5".
+ * SITE_ORIGIN is the public https origin used for share metadata, such as
+ * "https://example.com". Leave it null until that domain exists.
  */
 
-export type Allocation = {
-  /** Public label, for example "Liquidity". */
-  label: string;
-  /** Exact share from 0 to 100. Do not invent a number to complete a chart. */
+export type TaxDetail = {
+  /** Exact percent. 5 means 5%. Use 0 only when the token charges no tax. */
   percent: number;
+  /** Initial rate, later rate, trigger, or remaining admin power, when relevant. */
+  note: string | null;
+};
+
+export type AllocationItem = {
+  label: string;
+  percent: string;
+  purpose: string;
+  vesting: string | null;
+  wallet: string | null;
+  walletUrl: string | null;
+};
+
+export type LiquidityDetail = {
+  dex: string | null;
+  pool: string | null;
+  status: "locked" | "burned" | "unlocked" | "partial" | "unannounced";
+  /** Share affected, written as published, such as "80% of the LP tokens". */
+  proportion: string | null;
+  proportionMeasures: string | null;
+  lockProvider: string | null;
+  unlockDate: string | null;
+  evidenceUrl: string | null;
+  note: string | null;
+  lastChecked: string | null;
+};
+
+export type AdminDetail = {
+  arrangement: string | null;
+  powers: string | null;
+  multisig: string | null;
+  timelock: string | null;
+  evidenceUrl: string | null;
+  lastChecked: string | null;
 };
 
 export type OfficialChannel = {
@@ -21,23 +58,31 @@ export type OfficialChannel = {
 };
 
 export type LaunchStatus = "prelaunch" | "live";
+export type AllocationBasis = "launch" | "current";
 
 export const project = {
   PROJECT_NAME: "Superintelligent Vitalik",
-  TOKEN_SYMBOL: "$SIVITALIK",
-  NETWORK: "Ethereum",
-  CONTRACT_ADDRESS: "",
-  EXPLORER_URL: "",
-  BUY_URL: "",
-  CHART_URL: "",
-  TELEGRAM_URL: "",
-  X_URL: "",
-  TOTAL_SUPPLY: "",
-  BUY_TAX: "",
-  SELL_TAX: "",
-  ALLOCATIONS: [] as Allocation[],
-  LIQUIDITY_DETAILS: "",
-  ADMIN_CONTROLS: "",
+  TOKEN_SYMBOL: "SIVITALIK",
+  DISPLAY_TICKER: "$SIVITALIK",
+  NETWORK: "Ethereum Mainnet",
+  TOKEN_STANDARD: null as string | null,
+  SITE_ORIGIN: null as string | null,
   LAUNCH_STATUS: "prelaunch" as LaunchStatus,
+  CONTRACT_ADDRESS: null as string | null,
+  POOL_ADDRESS: null as string | null,
+  EXPLORER_URL: null as string | null,
+  BUY_URL: null as string | null,
+  CHART_URL: null as string | null,
+  TELEGRAM_URL: null as string | null,
+  X_URL: null as string | null,
   OTHER_CHANNELS: [] as OfficialChannel[],
+  TOTAL_SUPPLY: null as string | null,
+  DECIMALS: null as number | null,
+  BUY_TAX: null as TaxDetail | null,
+  SELL_TAX: null as TaxDetail | null,
+  ALLOCATION_BASIS: null as AllocationBasis | null,
+  ALLOCATIONS: null as AllocationItem[] | null,
+  LIQUIDITY: null as LiquidityDetail | null,
+  ADMIN: null as AdminDetail | null,
+  LAST_CHECKED: null as string | null,
 };
