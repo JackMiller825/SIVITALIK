@@ -84,7 +84,7 @@ export const project = {
   BUY_URL: null as string | null,
   CHART_URL: null as string | null,
   // Replace these with the project profiles. Every X and Telegram link reads these fields.
-  TELEGRAM_URL: "https://t.me/" as string | null,
+  TELEGRAM_URL: "https://t.me/SIVitalik" as string | null,
   X_URL: "https://x.com/" as string | null,
   OTHER_CHANNELS: [] as OfficialChannel[],
   TOTAL_SUPPLY: "1000000000" as string | null,

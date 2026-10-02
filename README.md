@@ -64,7 +64,7 @@ These stay `null` on purpose:
 - Trading URL
 - Chart URL
 - The real X profile URL (`X_URL` currently opens https://x.com/)
-- The real Telegram URL (`TELEGRAM_URL` currently opens https://t.me/)
+- Telegram is https://t.me/SIVitalik
 - Confirmed trading venues in `TRADING_VENUES`
 - Total supply, if you want the large supply figure shown
 - Allocation basis and category list
