@@ -31,6 +31,21 @@ export function TokenSection() {
             <p className="mt-2 text-3xl font-semibold text-silver sm:text-4xl">To be announced</p>
           )}
           <dl className="mt-8 divide-y divide-white/10 rounded-[28px] border border-white/10 bg-[#0b1028] px-5 sm:px-6">
+            {address ? (
+              <div className="py-4">
+                <dt className="text-sm text-mist">Contract address</dt>
+                <div className="mt-1 flex items-center gap-3">
+                  <dd className="min-w-0 flex-1 font-mono text-sm break-all text-silver">{address}</dd>
+                  <CopyAddress address={address} />
+                </div>
+                {explorer ? (
+                  <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring mt-3 inline-block text-sm text-cyan underline-offset-4 hover:underline">
+                    View on Etherscan
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
             <Fact label="Buy tax" value={buyTax ?? "To be announced"} note={project.BUY_TAX?.note} />
             <Fact label="Sell tax" value={sellTax ?? "To be announced"} note={project.SELL_TAX?.note} />
             <Fact
@@ -43,25 +58,10 @@ export function TokenSection() {
                     : "Details pending"
               }
             />
-            {address ? (
-              <div className="py-4">
-                <dt className="text-sm text-mist">Contract address</dt>
-                <dd className="mt-1 font-mono text-sm break-all text-silver">{address}</dd>
-                <div className="mt-3">
-                  <CopyAddress address={address} />
-                </div>
-                {explorer ? (
-                  <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring mt-3 inline-block text-sm text-cyan underline-offset-4 hover:underline">
-                    View on Etherscan
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                ) : null}
-              </div>
-            ) : null}
             <div className="py-4">
               <dt className="text-sm text-mist">Contract controls</dt>
               <dd className="mt-1 text-base leading-relaxed text-silver">
-                {admin ? adminText(admin) : "LP tokens are burnt, and contract ownership is renounced."}
+                {admin ? adminText(admin) : "LP tokens are burnt and contract ownership is renounced."}
               </dd>
               {admin?.evidenceUrl ? (
                 <a href={admin.evidenceUrl} target="_blank" rel="noopener noreferrer" className="focus-ring mt-2 inline-block text-sm text-cyan underline-offset-4 hover:underline">
@@ -124,5 +124,5 @@ function liquidityText(status: NonNullable<typeof project.LIQUIDITY>["status"]) 
 
 function adminText(admin: NonNullable<typeof project.ADMIN>) {
   const parts = [admin.arrangement, admin.powers, admin.multisig, admin.timelock].filter(Boolean);
-  return parts.length > 0 ? parts.join(" ") : "LP tokens are burnt, and contract ownership is renounced.";
+  return parts.length > 0 ? parts.join(" ") : "LP tokens are burnt and contract ownership is renounced.";
 }

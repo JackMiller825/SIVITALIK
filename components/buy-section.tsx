@@ -1,10 +1,7 @@
-import { CopyAddress } from "@/components/copy-address";
 import { project } from "@/config/project";
 import { BrandLogo } from "@/components/brand-logo";
 
 export function BuySection() {
-  const address = project.CONTRACT_ADDRESS?.trim() || null;
-
   return (
     <section id="how-to-buy" className="section-scroll bg-obsidian py-20 sm:py-28">
       <div className="mx-auto max-w-[1160px] px-5 sm:px-8">
@@ -63,14 +60,6 @@ export function BuySection() {
                   </a>{" "}
                   in Google Chrome or on the browser inside your MetaMask app. Connect your wallet. Paste the {project.DISPLAY_TICKER} token address into Uniswap, select {project.DISPLAY_TICKER}, and confirm. When MetaMask prompts you for a wallet signature, review the swap and sign only if it matches.
                 </p>
-                {address ? (
-                  <div className="mt-4">
-                    <code className="block font-mono text-sm break-all text-silver">{address}</code>
-                    <div className="mt-3">
-                      <CopyAddress address={address} />
-                    </div>
-                  </div>
-                ) : null}
               </div>
             </div>
           </li>
