@@ -12,7 +12,6 @@ export function TokenSection() {
   const liquidity = project.LIQUIDITY;
   const admin = project.ADMIN;
   const address = project.CONTRACT_ADDRESS?.trim() || null;
-  const liquidityAmount = project.LIQUIDITY_AMOUNT?.trim() || null;
   const explorer = explorerHref();
 
   return (
@@ -31,35 +30,27 @@ export function TokenSection() {
             <p className="mt-2 text-3xl font-semibold text-silver sm:text-4xl">To be announced</p>
           )}
           <dl className="mt-8 divide-y divide-white/10 rounded-[28px] border border-white/10 bg-[#0b1028] px-5 sm:px-6">
-            {address ? (
-              <div className="py-4">
-                <dt className="text-sm text-mist">Contract address</dt>
+            <div className="py-4">
+              <dt className="text-sm text-mist">Contract address</dt>
+              {address ? (
                 <div className="mt-1 flex items-center gap-3">
                   <dd className="min-w-0 flex-1 font-mono text-sm whitespace-nowrap text-silver max-sm:overflow-x-auto max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden">{address}</dd>
                   <div className="shrink-0">
                     <CopyAddress address={address} />
                   </div>
                 </div>
-                {explorer ? (
-                  <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring mt-3 inline-block text-sm text-cyan underline-offset-4 hover:underline">
-                    View on Etherscan
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                ) : null}
-              </div>
-            ) : null}
+              ) : (
+                <dd className="mt-1 text-lg text-silver">Coming Soon...</dd>
+              )}
+              {address && explorer ? (
+                <a href={explorer} target="_blank" rel="noopener noreferrer" className="focus-ring mt-3 inline-block text-sm text-cyan underline-offset-4 hover:underline">
+                  View on Etherscan
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ) : null}
+            </div>
             <Fact label="Buy tax" value={buyTax ?? "To be announced"} note={project.BUY_TAX?.note} />
             <Fact label="Sell tax" value={sellTax ?? "To be announced"} note={project.SELL_TAX?.note} />
-            <Fact
-              label="Liquidity"
-              value={
-                liquidityAmount
-                  ? groupInteger(liquidityAmount)
-                  : liquidity
-                    ? liquidityText(liquidity.status)
-                    : "Details pending"
-              }
-            />
             <div className="py-4">
               <dt className="text-sm text-mist">Contract controls</dt>
               <dd className="mt-1 text-base leading-relaxed text-silver">
@@ -114,14 +105,6 @@ function Fact({ label, value, note }: { label: string; value: string; note?: str
       {note ? <p className="mt-1 text-sm leading-relaxed text-mist">{note}</p> : null}
     </div>
   );
-}
-
-function liquidityText(status: NonNullable<typeof project.LIQUIDITY>["status"]) {
-  if (status === "locked") return "Locked";
-  if (status === "burned") return "LP tokens burned";
-  if (status === "unlocked") return "Unlocked";
-  if (status === "partial") return "Partially locked";
-  return "Details pending";
 }
 
 function adminText(admin: NonNullable<typeof project.ADMIN>) {

@@ -77,8 +77,8 @@ export const project = {
   TOKEN_STANDARD: null as string | null,
   SITE_ORIGIN: null as string | null,
   LAUNCH_STATUS: "prelaunch" as LaunchStatus,
-  /** Temporary token contract. Replace with the final address when it is confirmed. */
-  CONTRACT_ADDRESS: "0x56D487B457813B6aD8Bd885AB437526E038D3B7C" as string | null,
+  /** Token contract. Null until the address is confirmed. */
+  CONTRACT_ADDRESS: null as string | null,
   POOL_ADDRESS: null as string | null,
   EXPLORER_URL: null as string | null,
   BUY_URL: null as string | null,
@@ -94,8 +94,8 @@ export const project = {
   ALLOCATION_BASIS: null as AllocationBasis | null,
   ALLOCATIONS: null as AllocationItem[] | null,
   LIQUIDITY: null as LiquidityDetail | null,
-  /** Whole-token liquidity figure. Null hides the number and falls back to status text. */
-  LIQUIDITY_AMOUNT: "1000000000" as string | null,
+  /** Whole-token liquidity figure. The public page does not list this row. */
+  LIQUIDITY_AMOUNT: null as string | null,
   ADMIN: null as AdminDetail | null,
   LAST_CHECKED: null as string | null,
   /** Confirmed token listings only. An empty list hides the venues strip. */
