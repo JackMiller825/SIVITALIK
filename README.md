@@ -18,6 +18,18 @@ npm run lint
 npm run build
 ```
 
+## Saved build
+
+`npm run release` creates a production server and saves it as `public/superintelligent-vitalik-build.zip`. The archive includes `BUILD.txt` with the package version and commit.
+
+Unzip it and start the site with Node 20 or newer:
+
+```bash
+node server.js
+```
+
+It listens on `PORT` (default 3000). To publish the same project on Vercel, save the repository, then use Publish. Vercel builds from this source; the zip is the self-hosted copy.
+
 ## Artwork
 
 Optimized files live in `public/brand/`. Originals are kept in `assets/brand/originals/`.

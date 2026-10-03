@@ -2,10 +2,14 @@
   "name": "superintelligent-vitalik",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "release": "next build && node scripts/pack-release.mjs",
     "lint": "eslint"
   },
   "dependencies": {
