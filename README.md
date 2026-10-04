@@ -72,7 +72,6 @@ These stay `null` on purpose:
 
 - Token standard, if you want it named
 - Public site origin
-- Token contract address
 - Pool or pair address
 - Block explorer URL
 - Trading URL

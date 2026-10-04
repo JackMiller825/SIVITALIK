@@ -77,8 +77,8 @@ export const project = {
   TOKEN_STANDARD: null as string | null,
   SITE_ORIGIN: null as string | null,
   LAUNCH_STATUS: "prelaunch" as LaunchStatus,
-  /** Token contract. Null until the address is confirmed. */
-  CONTRACT_ADDRESS: null as string | null,
+  /** Published token contract on Ethereum Mainnet. */
+  CONTRACT_ADDRESS: "0x82a4a0b5871b384f8273b7ab006a031ede23dfdf" as string | null,
   POOL_ADDRESS: null as string | null,
   EXPLORER_URL: null as string | null,
   BUY_URL: null as string | null,
