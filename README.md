@@ -64,6 +64,8 @@ When trading is verified, the navigation action is **Buy $SIVITALIK** and opens 
 
 There is no wallet connection. A purchase happens on the published trading page.
 
+X is https://x.com/sivitalik_eth. Telegram is https://t.me/sivitalik.
+
 ## Still needed before launch
 
 These stay `null` on purpose:
@@ -75,8 +77,6 @@ These stay `null` on purpose:
 - Block explorer URL
 - Trading URL
 - Chart URL
-- The real X profile URL (`X_URL` currently opens https://x.com/)
-- Telegram is https://t.me/SIVitalik
 - Confirmed trading venues in `TRADING_VENUES`
 - Total supply, if you want the large supply figure shown
 - Allocation basis and category list
